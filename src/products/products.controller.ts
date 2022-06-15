@@ -1,4 +1,5 @@
-import { Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Patch, Post } from '@nestjs/common';
+import { ProductForm, ProductModel } from 'src/interfaces/product.interface';
 import { ProductsService } from './products.service';
 
 @Controller('products')
@@ -11,8 +12,8 @@ export class ProductsController {
   }
 
   @Post()
-  create(): Promise<any> {
-    return Promise.resolve({});
+  create(@Body() product: ProductForm): Promise<ProductModel> {
+    return Promise.resolve(this.productService.save(product as ProductModel));
   }
 
   @Delete()
