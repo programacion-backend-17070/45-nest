@@ -10,14 +10,13 @@ export class ProductsService {
 
   private readonly database: ProductModel[] = [];
 
-  getAll(): ProductModel[] {
-    return this.database;
+  async getAll(): Promise<ProductModel[]> {
+    const data = await this.model.find({}).exec();
+    return data;
   }
 
-  save(product: ProductModel): ProductModel {
-    product.id = (this.database[this.database.length - 1]?.id || 0) + 1;
-    this.database.push(product);
-
-    return product;
+  async save(product: ProductModel): Promise<ProductModel> {
+    const databaseData = await this.model.create(product);
+    return databaseData;
   }
 }

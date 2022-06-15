@@ -8,12 +8,12 @@ export class ProductsController {
 
   @Get()
   getAll(): Promise<any[]> {
-    return Promise.resolve(this.productService.getAll());
+    return this.productService.getAll();
   }
 
   @Post()
   create(@Body() product: ProductForm): Promise<ProductModel> {
-    return Promise.resolve(this.productService.save(product as ProductModel));
+    return this.productService.save(product as ProductModel);
   }
 
   @Delete()
