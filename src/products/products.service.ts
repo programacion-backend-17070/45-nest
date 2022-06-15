@@ -19,4 +19,8 @@ export class ProductsService {
     const databaseData = await this.model.create(product);
     return databaseData;
   }
+
+  delete(id: string) {
+    return this.model.deleteOne({ _id: new Types.ObjectId(id) });
+  }
 }
