@@ -1,8 +1,12 @@
 import { Injectable } from '@nestjs/common';
-import { Product, ProductForm, ProductModel } from 'src/interfaces/product.interface';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model, Types } from 'mongoose';
+
+import { ProductModel } from 'src/interfaces/product.interface';
 
 @Injectable()
 export class ProductsService {
+  constructor(@InjectModel('products') private model: Model<ProductModel>) {}
 
   private readonly database: ProductModel[] = [];
 
@@ -11,9 +15,9 @@ export class ProductsService {
   }
 
   save(product: ProductModel): ProductModel {
-    product.id = (this.database[this.database.length - 1]?.id || 0) + 1
-    this.database.push(product)
+    product.id = (this.database[this.database.length - 1]?.id || 0) + 1;
+    this.database.push(product);
 
-    return product
+    return product;
   }
 }
