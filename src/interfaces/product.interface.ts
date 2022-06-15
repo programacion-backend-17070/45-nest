@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export interface Product {
   name: string;
   price: number;
-  platform: 'Xbox' | 'PS4' | 'Nintendo';
+  platform: string;
   description: string;
 }
 
